@@ -22,9 +22,13 @@ public class ImageManager : MonoBehaviour, IGameManager
 
     public void GetWedImage(Action<Texture2D> callback)
     {
-        if(_webImage == null)
+        if (_webImage == null)
         {
-            StartCoroutine(_network.DownLoadImage(callback));
+            StartCoroutine(_network.DownLoadImage((Texture2D image) =>
+            {
+                _webImage = image;
+                callback(_webImage);
+            }));
         }
         else
         {
