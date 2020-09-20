@@ -7,6 +7,7 @@ public class NetworkService
 {
     private const string xmlApi = "http://api.openweathermap.org/data/2.5/weather?q=Chicago,us&mode=xml&APPID=9094b2f987770e9d07f2fa80dedf09dd";
     private const string jsonApi = "http://api.openweathermap.org/data/2.5/weather?q=Chicago,us&APPID=9094b2f987770e9d07f2fa80dedf09d";
+    private const string webImage = "http://upload.wikimedia.org/wikipedia/commons/c/c5/Moraine_Lake_17092005.jpg";
 
     private IEnumerator CallApi(string url, Action<string> callBack)
     {
@@ -37,5 +38,12 @@ public class NetworkService
     public IEnumerator GetWeatherJson(Action<string> callback)
     {
         return CallApi(jsonApi, callback);
+    }
+
+    public IEnumerator DownLoadImage(Action<Texture2D> callback)
+    {
+        UnityWebRequest request = UnityWebRequestTexture.GetTexture(webImage);
+        yield return request.Send();
+        callback(DownloadHandlerTexture.GetContent(request));
     }
 }
