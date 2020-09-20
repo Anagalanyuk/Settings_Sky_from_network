@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class BackAndForth : MonoBehaviour {
 	public float speed = 3.0f;

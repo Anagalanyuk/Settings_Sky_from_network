@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 // MouseLook rotates the transform based on the mouse delta.
 // To make an FPS style character:
