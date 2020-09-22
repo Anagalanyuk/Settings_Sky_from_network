@@ -37,22 +37,25 @@ public class MouseLook : MonoBehaviour {
 	}
 
 	void Update() {
-		//if (axes == RotationAxes.MouseX) {
-		//	transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivityHor, 0);
-		//}
-		//else if (axes == RotationAxes.MouseY) {
-		//	_rotationX -= Input.GetAxis("Mouse Y") * sensitivityVert;
-		//	_rotationX = Mathf.Clamp(_rotationX, minimumVert, maximumVert);
-			
-		//	transform.localEulerAngles = new Vector3(_rotationX, transform.localEulerAngles.y, 0);
-		//}
-		//else {
-		//	float rotationY = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityHor;
+        if (axes == RotationAxes.MouseX)
+        {
+            transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivityHor, 0);
+        }
+        else if (axes == RotationAxes.MouseY)
+        {
+            _rotationX -= Input.GetAxis("Mouse Y") * sensitivityVert;
+            _rotationX = Mathf.Clamp(_rotationX, minimumVert, maximumVert);
 
-		//	_rotationX -= Input.GetAxis("Mouse Y") * sensitivityVert;
-		//	_rotationX = Mathf.Clamp(_rotationX, minimumVert, maximumVert);
+            transform.localEulerAngles = new Vector3(_rotationX, transform.localEulerAngles.y, 0);
+        }
+        else
+        {
+            float rotationY = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityHor;
 
-		//	transform.localEulerAngles = new Vector3(_rotationX, rotationY, 0);
-		//}
-	}
+            _rotationX -= Input.GetAxis("Mouse Y") * sensitivityVert;
+            _rotationX = Mathf.Clamp(_rotationX, minimumVert, maximumVert);
+
+            transform.localEulerAngles = new Vector3(_rotationX, rotationY, 0);
+        }
+    }
 }
