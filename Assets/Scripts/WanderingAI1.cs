@@ -35,6 +35,7 @@ public class WanderingAI1 : MonoBehaviour
                     fireball = Instantiate(fireballPrefab) as GameObject;
                     fireball.transform.position = transform.TransformPoint(Vector3.forward * 1.5f);
                     fireball.transform.rotation = transform.rotation;
+
                 }
             }
             else if (hit.distance < obstracleRange)

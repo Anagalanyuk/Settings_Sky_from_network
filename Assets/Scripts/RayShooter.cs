@@ -4,6 +4,11 @@ using UnityEngine;
 public class RayShooter : MonoBehaviour
 {
     private Camera _camera;
+
+    [SerializeField] private AudioSource soundSource;
+    [SerializeField] private AudioClip hitWallSound;
+    [SerializeField] private AudioClip hitEnemySound;
+
     private void Start()
     {
         _camera = GetComponent<Camera>();
@@ -34,11 +39,12 @@ public class RayShooter : MonoBehaviour
                 if (target != null)
                 {
                     target.ReactToHit();
-                    Debug.Log("target hit");
+                    soundSource.PlayOneShot(hitEnemySound);
                 }
                 else
                 {
                     StartCoroutine(SpherIndicator(hit.point));
+                    soundSource.PlayOneShot(hitWallSound);
                 }
             }
         }
