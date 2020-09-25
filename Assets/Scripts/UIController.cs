@@ -9,6 +9,7 @@ public class UIController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI scrollLable;
     [SerializeField] private SettingPopup menuSetting;
+    [SerializeField] private SettingPopup menu;
     private int score;
 
     private void Awake()
@@ -24,6 +25,7 @@ public class UIController : MonoBehaviour
 
     private void Start()
     {
+        menu.gameObject.SetActive(false);
         score = 0;
         scrollLable.text = score.ToString();
         menuSetting.Close();
@@ -36,7 +38,23 @@ public class UIController : MonoBehaviour
 
     private void Update()
     {
-       // scrollLable.text = Time.realtimeSinceStartup.ToString();
+        if(Input.GetKeyDown(KeyCode.M))
+        {
+            bool isShowing = menu.gameObject.activeSelf;
+            menu.gameObject.SetActive(!isShowing);
+
+            if(isShowing)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+        }
+
     }
 
     public void OnOpenSetting()
