@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,11 +7,21 @@ public class WanderingAI1 : MonoBehaviour
 {
     [SerializeField] private GameObject fireballPrefab;
     private GameObject fireball;
-
-    public float speed = 3.0f;
+    public const float baseSpeed = 10.0f;
+    public float speed = 10.0f;
     public float obstracleRange = 5.0f;
     public bool _alive;
 
+
+    private void Awake()
+    {
+        Messenger<float>.AddListener(GameEvent.SPEED_CHANGED, SpeedChanged);
+    }
+
+    private void SpeedChanged(float value)
+    {
+        speed = baseSpeed * value;
+    }
 
     private void Start()
     {
@@ -40,7 +51,7 @@ public class WanderingAI1 : MonoBehaviour
             }
             else if (hit.distance < obstracleRange)
             {
-                float angle = Random.Range(-110, 110);
+                float angle = UnityEngine.Random.Range(-110, 110);
                 transform.Rotate(0, angle, 0);
             }
         }
@@ -49,5 +60,21 @@ public class WanderingAI1 : MonoBehaviour
     public void SetAlive(bool alive)
     {
         _alive = alive;
+    }
+
+    private void OnDestroy()
+    {
+        Messenger<float>.RemoveListener(GameEvent.SPEED_CHANGED, SpeedChanged);
+    }
+
+    public void OnSpeed()
+    {
+        speed = 3.0f;
+    }
+
+    public void OffSpeed()
+    {
+        speed = 0.0f;
+
     }
 }
