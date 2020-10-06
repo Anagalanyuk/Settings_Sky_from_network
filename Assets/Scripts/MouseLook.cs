@@ -72,7 +72,7 @@ public class MouseLook : MonoBehaviour
 
     public void OffMouseLook()
     {
-        Debug.LogError("Mouse look");
+      //  Debug.LogError("Mouse look");
         sensitivityHor = 0;
         sensitivityVert = 0;
     }

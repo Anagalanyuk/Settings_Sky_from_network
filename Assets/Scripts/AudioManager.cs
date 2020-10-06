@@ -1,10 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour, IGameManager
 {
     [SerializeField] private AudioSource _audiosource;
+    [SerializeField] private AudioSource _music1Source;
+
+    [SerializeField] private string _introBGMusic;
+    [SerializeField] private string _levelBDMusic;
 
     public float soundVolume
     {
@@ -36,5 +41,26 @@ public class AudioManager : MonoBehaviour, IGameManager
     public void PlaySound(AudioClip clip)
     {
         _audiosource.PlayOneShot(clip);
+    }
+
+    public void PlayIntroMusic()
+    {
+        PlayMusic(Resources.Load("Music/" + _introBGMusic) as AudioClip);
+    }
+
+    public void PlayLevelMucic()
+    {
+        PlayMusic(Resources.Load("Music/" + _levelBDMusic) as AudioClip);
+    }
+
+    private void PlayMusic(AudioClip clip)
+    {
+        _music1Source.clip = clip;
+        _music1Source.Play();
+    }
+
+    public void StopMusic()
+    {
+        _music1Source.Stop();
     }
 }

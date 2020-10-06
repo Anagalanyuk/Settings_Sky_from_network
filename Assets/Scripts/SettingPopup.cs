@@ -44,4 +44,20 @@ public class SettingPopup : MonoBehaviour
     {
         Managers.Audio.soundVolume = value;
     }
+
+    public void OnPlayMusic(int selector)
+    {
+        switch (selector)
+        {
+            case 1:
+                Managers.Audio.PlayIntroMusic();
+                break;
+            case 2:
+                Managers.Audio.PlayLevelMucic();
+                break;
+            default:
+                Managers.Audio.StopMusic();
+                break;
+        }
+    }
 }
