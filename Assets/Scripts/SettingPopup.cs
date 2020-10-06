@@ -7,6 +7,7 @@ public class SettingPopup : MonoBehaviour
 {
     [SerializeField] private Slider volumeSlider;
     [SerializeField] private Slider SpeedSlider;
+    [SerializeField] private AudioClip _sound;
 
     private void Start()
     {
@@ -36,6 +37,7 @@ public class SettingPopup : MonoBehaviour
     public void OnSoundToggle()
     {
         Managers.Audio.soundMute = !Managers.Audio.soundMute;
+        Managers.Audio.PlaySound(_sound);
     }
 
     public void OnSoundValue(float value)
